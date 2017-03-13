@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+        <div id="kkk" class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{/admin/users}">Users</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_USER')">
+                            <a th:href="@{/user/personal}">View Personal Data</a>
+                        </li>
+                    </th:block>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <th:block sec:authorize="isAuthenticated()">
+                        <li>
+                            <a th:href="@{/logout}">Sign out</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="isAnonymous()">
+                        <li>
+                            <th:block th:switch="${currentPage == 'login'}">
+                                <span th:case="true" class="active">Sign in</span>
+                                <a th:case="false" th:href="@{/login}">Sign in</a>
+                            </th:block>
+                        </li>
+                        <li>
+                            <th:block th:switch="${currentPage == 'register'}">
+                                <span th:case="true" class="active">Registration</span>
+                                <a th:case="false" th:href="@{/register}">Registration</a>
+                            </th:block>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

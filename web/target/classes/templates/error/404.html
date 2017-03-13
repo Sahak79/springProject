@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" media="screen"
+          th:href="@{/css/main.css}"
+          href="../static/css/main.css"/>
+</head>
+<body class="color-blue">
+    <div th:text="|The requested '${requestedResource}' resource not found|"></div>
+</body>
+</html>

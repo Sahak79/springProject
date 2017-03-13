@@ -1,0 +1,59 @@
+.nav span.active{
+    display: block;
+    padding: 15px;
+}
+.login-container {
+    margin: 100px auto;
+    width: 300px;
+}
+.login-container .form-signin button {
+    float: right;
+}
+.registration-container {
+    margin: 100px auto;
+    width: 500px;
+}
+.registration-container input[type=text] {
+    width: 300px;
+}
+.registration-container .field-error {
+    padding-left: 10px;
+}
+.form-control {
+    margin-bottom: 7px;
+}
+.users {
+   margin-top: 50px;
+}
+.users .alert-info {
+    margin: 10px auto;
+    width: 700px;
+    text-align: right;
+}
+.users table.table {
+    margin: 0 auto;
+    width: 700px;
+}
+.user-container {
+    margin: 100px auto;
+}
+.user-container table:first-child {
+    margin: 0px auto;
+}
+.user-container table.user-info {
+    margin-right: 30px;
+    width: 350px;
+}
+.user-container form {
+    margin-top: 35px;
+}
+.user-container .field-error {
+    padding-left: 10px;
+    color: #e00;
+}
+.user-container input[type=text] {
+    width: 300px;
+}
+.user-container select {
+    width: 300px;
+}

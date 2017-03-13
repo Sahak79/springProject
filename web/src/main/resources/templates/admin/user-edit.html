@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='user-edit'">
+<head>
+    <title>
+        <th:block th:text="#{title.page.registration}"/>
+    </title>
+
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/css/main.css}" href="../static/css/main.css"/>
+</head>
+<body>
+    <div th:include="fragments/header :: header">
+        [HEADER]
+    </div>
+    <div class="user-container">
+        <div th:if="${user == null}" th:utext="#{err.requested.user.not.found}"
+             class="alert alert-danger" style="width: 700px; margin: 0 auto;"></div>
+        <table th:if="${user != null}">
+            <tr>
+                <td>
+                    <table th:object="${session.editingUser}" class="table table-sm user-info">
+                        <tr>
+                            <td>
+                                <label th:text="#{label.user.status}"></label>
+                            </td>
+                            <td th:text="#{*{status.msgKey}}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label th:text="#{label.user.profile}"></label>
+                            </td>
+                            <td th:text="#{*{profile.msgKey}}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label th:text="#{label.first.name}"></label>
+                            </td>
+                            <td th:text="*{firstName}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label th:text="#{label.last.name}"></label>
+                            </td>
+                            <td th:text="*{lastName}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label th:text="#{label.email}"></label>
+                            </td>
+                            <td th:text="*{email}"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/admin/user}" th:object="${user}" method="post">
+                        <table>
+                            <tr>
+                                <td>
+                                    <select id="status" th:field="*{status}" class="form-control">
+                                        <option value="" th:text="#{select.option.default}"></option>
+                                        <option th:each="s : ${T(am.gch.usd.common.data.model.lcp.UserStatus).values()}"
+                                                th:value="${s}" th:text="#{${s.msgKey}}">
+                                        </option>
+                                    </select>
+                                </td>
+                                <td th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="field-error"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select id="profile" th:field="*{profile}" class="form-control">
+                                        <option value="" th:text="#{select.option.default}"></option>
+                                        <option th:each="p : ${T(am.gch.usd.common.data.model.lcp.UserProfile).values()}"
+                                                th:value="${p}" th:text="#{${p.msgKey}}">
+                                        </option>
+                                    </select>
+                                </td>
+                                <td th:if="${#fields.hasErrors('profile')}" th:errors="*{profile}" class="field-error"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" th:field="*{firstName}" th:placeholder="#{label.first.name}" class="form-control"/>
+                                </td>
+                                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="field-error"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" th:field="*{lastName}" th:placeholder="#{label.last.name}" class="form-control"/>
+                                </td>
+                                <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="field-error"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="email" th:field="*{email}" th:placeholder="#{label.email}" class="form-control"/>
+                                </td>
+                                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="field-error"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <button type="submit" th:text="#{btn.edit}" class="btn btn-sm btn-primary">edit</button>
+                                </td>
+                                <td th:if="${#fields.hasErrors('*')}"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

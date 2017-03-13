@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='users'">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>
+        <th:block th:text="#{title.page.home}"/>
+    </title>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/css/main.css}" href="../static/css/main.css"/>
+</head>
+<body>
+<div>
+    <div th:include="fragments/header :: header"></div>
+    <div class="users">
+        <div th:if="${message != null}" th:utext="${message}"
+             class="alert alert-info fade in"></div>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>Status</th>
+                <th>Profile</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+                <th></th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="#{${user.status.msgKey}}"></td>
+                <td th:text="#{${user.profile.msgKey}}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{/admin/user(id=${user.id})}" th:text="#{link.edit}"></a>
+                    &nbsp;
+                    <a th:href="@{/admin/user-delete(id=${user.id})}" th:text="#{link.delete}"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

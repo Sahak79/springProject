@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='login'">
+<head>
+    <title>
+        <th:block th:text="#{title.page.login}"/>
+    </title>
+
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css}"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" media="screen" th:href="@{/css/main.css}" href="../static/css/main.css"/>
+
+    <script th:href="@{/webjars/jquery/2.2.0/jquery.min.js}"
+            href="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script th:href="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"
+            href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div th:include="fragments/header :: header">
+        [HEADER]
+    </div>
+    <div class="login-container">
+        <div th:if="${param.error}" class="alert alert-danger fade in"
+             th:utext="#{err.invalid.credentioal}"></div>
+        <div th:if="${param.logout}" class="alert alert-danger fade in"
+             th:utext="#{err.already.logged.out}"></div>
+
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <h2 class="form-signin-heading" th:text="#{label.login.info}"></h2>
+            <label for="inputEmail" class="sr-only" th:text="#{label.email}"></label>
+            <input type="email" name="username" id="inputEmail"
+                   class="form-control" placeholder="Email address"/>
+            <label for="inputPassword" class="sr-only" th:text="#{label.password}"></label>
+            <input type="password" name="password" id="inputPassword"
+                   class="form-control" placeholder="Password"/>
+            <button class="btn btn-sm btn-primary" type="submit" th:text="#{btn.login}"></button>
+        </form>
+    </div>
+</body>
+</html>
